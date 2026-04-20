@@ -62,29 +62,6 @@ Después de compilar, ejecuta el programa con:
   * Validación de tiempo de salida
 * Se diferenció el cobro según el tipo de vehículo.
 
-
-
-## Estructura del proyecto
-
-
-parqueadero/
-│
-├── main/
-│   └── parqueadero.cpp
-│
-├── progreso/
-│   ├── parqueadero1.cpp
-│   ├── parqueadero2.cpp
-│   ├── parqueadero3.cpp
-│   ├── parqueadero4.cpp
-│   ├── parqueadero5.cpp
-│   └── parqueadero6.cpp
-│   └── parqueadero7.cpp 
-│
-├── README.md
-└── .gitignore
-
-
 ## Ejemplo de uso
 
 Tipo (1=Carro, 2=Moto): 1
