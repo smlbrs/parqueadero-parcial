@@ -50,6 +50,19 @@ void mostrarMapa(char (*m)[COLS]) {
     }
 }
 
+bool placaRepetida(std::string placa) {
+    for (int i = 0; i < FILAS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (placas[i][j] == placa) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+
 void ingresarVehiculo(char (*m)[COLS], std::string p[FILAS][COLS]) {
     int x, y, t, tipo;   
     std::string placa;
@@ -63,7 +76,7 @@ void ingresarVehiculo(char (*m)[COLS], std::string p[FILAS][COLS]) {
     bool valida = false;
 
     if (tipo == 1) {
-    valida = validarCarro(placa);
+        valida = validarCarro(placa);
     
     } else if (tipo == 2) {
         valida = validarMoto(placa);
@@ -75,6 +88,11 @@ void ingresarVehiculo(char (*m)[COLS], std::string p[FILAS][COLS]) {
 
         if (!valida) {
         std::cout<<"Placa invalida\n";
+        return;
+    }
+
+        if (placaRepetida(placa)) {
+        std::cout<<"Placa ya registrada\n";
         return;
     }
 
@@ -116,8 +134,19 @@ void sacarVehiculo(char (*m)[COLS], std::string p[FILAS][COLS]) {
             std::cout<<"Tiempo de salida: ";
             std::cin>>salida;
 
+               if (salida < tiempoEntrada[x][y]) {
+                std::cout<<"Error en el tiempo\n";
+                return;
+            }
+
             int tiempo = salida - tiempoEntrada[x][y];
-            int pago = tiempo * 1000;
+            int pago;
+
+            if (esLetra(p[x][y][5])) {
+                pago = tiempo * 500;
+            } else {
+                pago = tiempo * 1000;
+            }
 
             std::cout<<"Vehiculo: "<<p[x][y]<<"\n";
             std::cout<<"Tiempo: "<<tiempo<<"\n";
@@ -125,6 +154,8 @@ void sacarVehiculo(char (*m)[COLS], std::string p[FILAS][COLS]) {
 
             m[x][y] = 'L';
             p[x][y] = "";
+
+             tiempoEntrada[x][y] = 0;
             
         } else {
             std::cout<<"No hay vehiculo en esa posicion\n";
@@ -140,6 +171,8 @@ int main() {
     for (int i = 0; i < FILAS; i++) {
         for (int j = 0; j < COLS; j++) {
             mapa[i][j] = 'L';
+            placas[i][j] = "";
+            tiempoEntrada[i][j] = 0;
         }
     }
 
