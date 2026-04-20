@@ -35,7 +35,7 @@ El sistema maneja dos tipos de vehículos:
 
 Para compilar el programa, usa el siguiente comando en la terminal:
 
-g++ src/main.cpp -o parqueadero
+g++ main/parqueadero.cpp -o parqueadero
 
 
 ## Ejecución
